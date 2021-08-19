@@ -7,7 +7,6 @@ package Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author or_mo
  */
-@WebServlet(name = "GreetingServlet", urlPatterns = {"/greeting/*"})
-public class GreetingServlet extends HttpServlet {
+@WebServlet(name = "RandomServlet", urlPatterns = {"/random.html"})
+public class RandomServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,31 +34,23 @@ public class GreetingServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-              out.println("<!DOCTYPE html>");
+            out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet GreetingServlet</title>");            
+            out.println("<title>Java EE Servlets</title>");            
             out.println("</head>");
             out.println("<body>");
+            out.println("<h4><a href='../index.html'>Voltar</a></h4>");
             out.println("<h1>Java EE</h1>");
             out.println("<h2>Servlets</h2>");
-            out.println("<h3>Recurso Requisitado</h3>");
-            out.println("<p>"+request.getRequestURI()+"</p>");
-            out.println("<h3>Saudação</h3>");
-            Calendar c = Calendar.getInstance();
-            int h = c.get(Calendar.HOUR_OF_DAY);
-            if (h<6){
-            out.println("<p>VAI DORMIR!!!!!!!!</p>");
-            }else if(h<12){
-           out.println("<p>Bom dia!!! </p>");
-        }else if (h<18){
-            out.println("<p> Boa Tarde!!!!!</p>");
-        }else{
-            out.println("<p> Boa Noite!!!!</p>");
-        }
-            
-            out.println("</html>");       
-       
+            out.println("<h3>Múmeros aleatórios</h3>");
+            for (int i=1; i<=10; i++){
+                int na= ((int) (Math.random() * 100));
+                out.print("<p> "+na+"</p>");  
+            }
+            out.println("<h4><a href='index.html'>Voltar</a></h4>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
