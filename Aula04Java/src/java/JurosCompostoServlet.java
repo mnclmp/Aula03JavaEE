@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author or_mo
+ * @author or_mo 
  */
 @WebServlet(urlPatterns = {"/juros-composto.html"})
 public class JurosCompostoServlet extends HttpServlet {
@@ -48,16 +48,17 @@ public class JurosCompostoServlet extends HttpServlet {
             out.println("<input type='number' name='month' placeholder='meses'>");
             out.println("<input type='submit' name='Calcule'>");
             out.println("</hr>");
+            //feito mesma declaração de variáveis para fazer os juros compostos 
             double vt_juros = 0, value = 0;
             int time = 0;
-            try {
+            try { //trazendo as variáveis para o formulário
              vt_juros = Double.parseDouble(request.getParameter("juros"));
              value  = Double.parseDouble(request.getParameter("valor_inicial"));
              time = Integer.parseInt(request.getParameter("month"));
-             
-            }catch(NumberFormatException ex){
+             //get.Parameter pega os valores que estão no formulário. Não confundir com atributes
+            }catch(NumberFormatException ex){ //convertendo dois tipos numéricos
             }
-            double calculo = value*Math.pow((1+(vt_juros/100)),time); 
+            double calculo = value*Math.pow((1+(vt_juros/100)),time); //novamente um calculo para retonar o valor do juros composto, através da declaração de variável.
             out.println("<hr/><h2>R$ "+new DecimalFormat( "#,###,###,##0.00" ).format(calculo)+"</h2>");
             
             out.println("</body>");

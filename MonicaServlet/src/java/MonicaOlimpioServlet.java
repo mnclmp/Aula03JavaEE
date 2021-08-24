@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author or_mo
  */
-@WebServlet(urlPatterns = {"/math-servlet.html"})
-public class mathservlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/monica-servlet.html"})
+public class MonicaOlimpioServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,32 +31,24 @@ public class mathservlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) { //era para ter criado o servlet sua burrinhz
+            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>MathServlet</title>");            
+            out.println("<title>Servlet MonicaOlimpioServlet</title>"); //titulo do servletinho           
             out.println("</head>");
             out.println("<body>");
-
-            out.println("<h1>Operações Matematicas</h1>"); //operações matemáticas fundamentais, cálculo para fazer todas
-            out.println("<form action='math-servlet.html'>"+"Continue as operações colocando os números aqui:<br>\n"+"<input type=\"number\" name=\"x\"/>\n"+"e "+"<input type=\"number\" name=\"y\"/>\n"+"<input type=\"submit\" value=\"Calcular Tudo\"/>\n"+"</form>");
-            double x = 0, y = 0; 
-            try{
-                x = Double.parseDouble(request.getParameter("x")); //get.parameter é a requisição
-            }catch(NumberFormatException ex){}
-            try{
-                y = Double.parseDouble(request.getParameter("y"));
-            }catch(NumberFormatException ex){}
-            out.println("<h4>Resultado da adição: "+(x+y)+"  "+"("+ x +" + "+ y +")"+"</h4>");
-            out.println("<h4>Resultado da subtração: "+(x-y)+"  "+"("+ x +" - "+ y +")"+"</h4>");
-            out.println("<h4>Resultado da multiplicação: "+(x*y)+"  "+"("+ x +" * "+ y +")"+"</h4>");
-            out.println("<h4>Resultado da divisão: "+(x/y)+"  "+"("+ x +" / "+ y +")"+"</h4>");
-            out.println("<h4><a href='index.html'>Voltar</a></h4>");
+            out.println("<h1> Monica Olimpio Ribeiro </h1>"); //minhas infos
+            out.println("<h2>RA:1290482012041 </h2>");
+            out.println("<h3><a href='https://github.com/mnclmp'> Github</a></h3> "); //link do github
+            out.println("<h4><a href=\'index.html\'> Voltar </a></h4> "); //voltando para a página htmll
+            
+            
             out.println("</body>");
             out.println("</html>");
         }
-    }//isso rodou  glória a deus
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
