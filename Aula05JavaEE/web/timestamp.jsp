@@ -19,7 +19,7 @@
         <h3> Data e Hora do Servidor </h3>
         <% 
             Date now = new Date ();
-            %> <!--> usando expression <--> 
+            %> 
             <div><%=  now %></div> 
         
     </body>
