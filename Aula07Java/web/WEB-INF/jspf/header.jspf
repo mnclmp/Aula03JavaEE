@@ -1,0 +1,47 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+
+<%
+  if(request.getParameter("authlogin")!=null){ //verificando se existe um login
+     String auth_usuario = request.getParameter("nome"); 
+     session.setAttribute("nome",auth_usuario);
+     response.sendRedirect(request.getRequestURI());
+    }else if(request.getParameter("authlogout")!=null){
+     session.removeAttribute("nome");
+     response.sendRedirect(request.getRequestURI());
+    }
+  String usuario = (String) session.getAttribute("nome");
+ 
+%>
+<html>
+    <head>
+        <a href="<%=request.getContextPath()%>/index.jsp">MonicaAPP</a> /
+       <a href="<%=request.getContextPath()%>/about.jsp">About Me</a>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>MonicaAPP</title>
+    </head>
+    <body>
+         <center>
+        <h1>Login usuário</h1>
+         <% if (usuario !=null){%>
+         
+         <div> Logado como: <%=usuario%></div>
+         <form>
+           <input type="submit" name="authlogout" value="logout"/>
+         </form>
+            <%}else{%>
+             <form method="post">
+            <label>NOME:</label><br><!-- comment -->
+            <input type="text" name="nome"/><br>
+            <label> SENHA:</label><br>
+            <input type="text" name="senha"/><br><br>
+            <input type="submit"  name="authlogin" value="login" /><br>
+            
+        </form>
+            
+            <%}%>
+            
+            
+        <hr/>
+    </center>
+    </body>
