@@ -1,0 +1,89 @@
+<%-- any content can be specified here e.g.: --%>
+<%@page import="java.util.Random"%>
+<%@page import="java.util.ArrayList"%>
+<%@ page pageEncoding="UTF-8" %>
+
+<%
+    String usuario = null;
+    Integer contador = 0;
+    ArrayList<String> lista_usuarios = new ArrayList();
+    ArrayList<Integer> numeros_lista = new ArrayList();
+
+    if (request.getParameter("usuario") != null) {
+        session.setAttribute("usuario", request.getParameter("usuario"));
+
+        if(request.getParameter ("contador") != null){
+        contador = (Integer) application.getAttribute("contador");
+        application.setAttribute("contador", ++contador);
+    } else {
+            application.setAttribute("contador", 1);
+        }
+         
+        contador = (Integer) application.getAttribute("contador");
+        
+        if(application.getAttribute("usuarios_online")!=null){
+                lista_usuarios = (ArrayList) application.getAttribute("usuarios_online");
+                lista_usuarios.add(session.getAttribute("usuario").toString());
+                application.setAttribute("usuarios_online", lista_usuarios);
+
+            } else {
+              lista_usuarios.add(request.getParameter("usuario"));
+              application.setAttribute("usuarios_online", lista_usuarios);
+
+            } 
+            
+            Random random = new Random ();
+            for(int i =0; i<=5; i++){
+              int temporario = (random.nextInt(60+1));
+              numeros_lista.add(temporario);
+    }   
+        session.setAttribute("randomlist", numeros_lista);
+    
+    } else if (request.getParameter("logout") != null) {
+        contador = (Integer) application.getAttribute("contador");
+        application.setAttribute("contador", --contador);
+        lista_usuarios = (ArrayList) application.getAttribute("usuarios_online");
+        int i = 0;
+        int indice = -1;
+        do{
+           if (session.getAttribute("usuario").equals(lista_usuarios.get(i))) {
+                   indice = i; //guardando a posição
+               }
+               i++;
+
+           } while (indice == -1);
+             lista_usuarios.remove(indice);
+             application.setAttribute("usuarios_online", lista_usuarios);
+        
+            session.removeAttribute("usuario");
+            response.sendRedirect(request.getRequestURI());
+        }
+        usuario = (String) session.getAttribute("usuario");
+
+%>
+
+
+
+
+
+MonicaAPP /
+<a href="index.jsp"> Início</a> 
+
+<%if(usuario!=null){%>
+/<a href="monica.jsp"> Sobre </a> /
+<a href="monica-dica-megasena.jsp">MegaSena</a>
+<hr/>
+<h1>Bem-vindo, <%=usuario%></h1>
+
+<!--- lougout -->
+<form method="post">
+    <input type="submit" name="logout" value="SAIR">
+</form>
+<%}%>
+<%if(usuario == null){%>
+<form method="post">
+    <h3>Entre com seu usuário</h3>
+    <input type='text' name="usuario" required>
+    <input type='submit' name="login" value="ENTRAR">
+</form>
+<%}%>
