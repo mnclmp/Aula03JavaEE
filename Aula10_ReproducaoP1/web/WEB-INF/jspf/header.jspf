@@ -1,0 +1,60 @@
+<%-- any content can be specified here e.g.: --%>
+<%@page import="java.util.ArrayList"%>
+<%@ page pageEncoding="UTF-8" %>
+
+<!-- dessa vez não criar uma variável contadora, economiza código -->
+
+<%
+    if (request.getParameter("login") != null) {
+            String userName = request.getParameter("usuario");
+            session.setAttribute("usuario", userName);
+            
+            //ao invés de criar um contador, faz um array 
+            ArrayList<Integer> headerNumeros = new ArrayList<>();
+            while (headerNumeros.size() < 6) {
+                int n = ((int) (61 * Math.random())) + 1;
+                if (!headerNumeros.contains(n)) { //contains serve para não repetir de número
+                    headerNumeros.add(n);
+                }
+            }
+            session.setAttribute("numeros_lista", headerNumeros); //exercitando a boa prática citada na aula
+            if (application.getAttribute("sessionList") == null) {
+                ArrayList<String> headerSessionList = new ArrayList<>();
+                headerSessionList.add(userName);
+                application.setAttribute("sessionList", headerSessionList);
+            } else {
+                ArrayList<String> headerSessionList = (ArrayList) application.getAttribute("sessionList");
+                headerSessionList.add(userName);
+                application.setAttribute("sessionList", headerSessionList);
+            }
+            response.sendRedirect(request.getRequestURI());
+            
+        } else if (request.getParameter("logout") != null) {
+            
+            if (application.getAttribute("sessionList") != null) {
+                ArrayList<String> headerSessionList = (ArrayList) application.getAttribute("sessionList");
+                headerSessionList.remove(session.getAttribute("usuario"));
+                application.setAttribute("sessionList", headerSessionList);
+            }
+            session.removeAttribute("usuario");
+            session.removeAttribute("numeros_lista");
+            response.sendRedirect(request.getRequestURI());
+        }
+        String usuario_auth = (String) session.getAttribute("usuario");
+%>
+
+<h1>MonicaAPP</h1>
+<form method="post">
+    <a href="index.jsp">Início</a> / 
+    <a href="monica.jsp">Sobre Mim</a> /
+    <a href="monica-dica-megasena.jsp">MegaSena</a> 
+    <%if(usuario_auth==null ){%>
+    <h3> Entre com seu usuário:</h3>   
+    <input type="text" name="usuario"/><br><br>
+    <input type="submit" name="login" value="ENTRAR"/><br>
+    <%}else{%>
+    <h1>Bem vindo, <%=usuario_auth%>!! :D</h1>
+        <input type="submit" name="logout" value="SAIR"/>
+    <%}%>
+</form>
+<hr/>
