@@ -89,7 +89,7 @@ public class Horario {
 
     public void setSegundos(int segundos) {
         if (segundos < 0) {
-            this.segundos = 0;
+            this.segundos = 00;
         }
         else if (segundos > 59) {
             this.segundos = 59;

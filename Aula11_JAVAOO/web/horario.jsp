@@ -8,14 +8,14 @@
 <!DOCTYPE html>
 <% 
     Horario atual = new Horario();
-    atual.setHoras(21);
-    atual.setMinutos(59);
+    atual.setHoras(22);
+    atual.setMinutos(8);
     atual.setSegundos(-3);
     
     Horario intervalo = new Horario();
     intervalo.setHoras(16);
     intervalo.setMinutos(40);
-    intervalo.setSegundos(0);
+    intervalo.setSegundos(-3);
 
 %>
 <html>
@@ -27,10 +27,12 @@
         <%@include file="WEB-INF/jspf/header.jspf" %>
         <center>
         <h2>Classe Horário</h2>
+        <fieldset>
         <h3>Horário atual da classe</h3>
-        <div><%= atual.getHoras() %>:<%= atual.getMinutos() %>:<%= atual.getSegundos() %></div>
+        <div><%= atual.getHorario()%></div>
         <h3>Intervalo:</h3>
         <div><%= intervalo.getHorario() %></div>
+        </fieldset>
     </center>
     </body>
     </body>
