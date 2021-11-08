@@ -37,7 +37,7 @@
         <h1>JDBC - Monica Olimpio Ribeiro</h1>
         <div><%= new java.util.Date() %></div>
         <h3></h3>
-        <h2>To-Do</h2>
+        <h2>To-Do List</h2>
         <%if(DBListener.exception!=null){%>
         <div style="color:red">
             Erro na criação do banco de dados:
